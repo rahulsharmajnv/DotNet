@@ -93,3 +93,5 @@ Transient = new instance per resolution.
 Best for: lightweight, stateless, safe-to-recreate services.
 Avoid for: expensive setup, shared state, or where caching is needed.
 */
+
+Testing

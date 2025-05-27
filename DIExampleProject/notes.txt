@@ -1,0 +1,95 @@
+🧰 Dependency Injection (DI) in ASP.NET Core – Key Concepts
+
+DI Lifetimes
+
+Singleton: One instance for the entire application lifetime. All consumers get the same instance.
+
+Scoped: One instance per HTTP request. Shared across services within the same request.
+
+Transient: A new instance is created every time the service is requested.
+
+Service Lifetime Effects
+
+GuidService (with a generated Guid) is used to demonstrate the effect of lifetimes.
+
+If GuidService is Transient → every injection results in a different GUID.
+
+If GuidService is Scoped → all services in one request get the same GUID.
+
+If GuidService is Singleton → same GUID across all requests and services.
+
+Dependency Chains
+
+MessageService and AnotherService both depend on DateTimeService and/or GuidService.
+
+CombinedService depends on both MessageService and AnotherService.
+
+Even if MessageService is Scoped, if GuidService is Transient → each dependent gets a different instance.
+
+Key Insight
+
+Changing the lifetime of services like MessageService or CombinedService does not affect whether their dependencies (like GuidService) are shared.
+What matters is the lifetime of the dependency itself (GuidService).
+
+Practical Behavior (Assuming Scoped GuidService)
+
+Service Lifetime	Will Get Same GuidService Instance?
+MessageService: Scoped	✅ Yes (per request)
+CombinedService: Scoped	✅ Yes (shares context)
+GuidService: Scoped	✅ Yes (shared if resolved in same request)
+GuidService: Transient	❌ No (new instance every time)
+
+Constructor Injection Best Practice
+
+Always prefer constructor injection over resolving services from IServiceProvider.
+
+Makes your services testable, predictable, and avoids runtime errors.
+
+Caching Behavior Example
+
+DateTimeService caches DateTime.Now at construction.
+
+Registering it as Singleton → same timestamp forever.
+
+Registering it as Transient → updated every time it's used.
+
+Registering it as Scoped → consistent timestamp within a single request.
+
+Middleware Integration
+
+Custom middleware logs request start and end time.
+
+Useful for observing behavior across scoped dependencies.
+
+
+🔍 Real-World Use Cases for Transient Lifetime:
+
+1. Stateless Utility Services:
+   - ValidationService, EncryptionHelper, RandomGenerator
+   - Light, short-lived, and safe to create multiple times.
+
+2. DTO Mapping:
+   - Services like AutoMapper or custom DTO-to-entity mappers.
+   - builder.Services.AddTransient<IMapper, CustomMapper>();
+
+3. Formatters/Converters:
+   - PdfFormatter, JsonFormatter, CsvFormatter (used once per operation).
+
+4. Token or ID Generators:
+   - ITokenGenerator generating fresh tokens every request.
+
+5. Command Handlers (CQRS pattern):
+   - builder.Services.AddTransient<ICommandHandler<CreateUserCommand>, Handler>();
+   - Executed once per request.
+
+6. Pipeline Behaviors (e.g., MediatR):
+   - LoggingBehavior<T>, ValidationBehavior<T>
+
+7. Unit Testing:
+   - Transient mocks and test doubles for isolation across test methods.
+
+🧠 Summary:
+Transient = new instance per resolution.
+Best for: lightweight, stateless, safe-to-recreate services.
+Avoid for: expensive setup, shared state, or where caching is needed.
+*/

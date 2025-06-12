@@ -31,3 +31,4 @@
 /Users/rahulsharma/DotNet/DIExampleProject/obj/Debug/net8.0/DIExampleProject.pdb
 /Users/rahulsharma/DotNet/DIExampleProject/obj/Debug/net8.0/DIExampleProject.genruntimeconfig.cache
 /Users/rahulsharma/DotNet/DIExampleProject/obj/Debug/net8.0/ref/DIExampleProject.dll
+/Users/rahulsharma/DotNet/DIExampleProject/obj/Debug/net8.0/DIExampleProject.sourcelink.json

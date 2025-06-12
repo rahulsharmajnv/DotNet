@@ -95,3 +95,69 @@ Avoid for: expensive setup, shared state, or where caching is needed.
 */
 
 Testing
+
+
+
+Delegates
+
+Explained types: Single-cast, Multi-cast, Func, Action, Predicate
+
+Sample code for all types combined
+
+Lambda Expressions
+
+Syntax: (param) => expression
+
+Used with LINQ, events, and delegates
+
+LINQ
+
+Syntax styles: Query vs Method
+
+Operators: Where, Select, Any, All, SelectMany
+
+Projection vs Selection explained
+
+Expression Trees
+
+Represent code as data
+
+Used by LINQ providers for query translation
+
+Anonymous Types & Tuples
+
+Anonymous types for inline projections
+
+Tuples for returning multiple values
+
+Nullable Reference Types & Null Handling
+
+string? enables compile-time null safety
+
+Operators: ??, ?., ??=
+
+Records & with Expressions
+
+Immutable reference types with value equality
+
+Supports non-destructive mutation with with
+
+Pattern Matching & Enhanced switch
+
+Type, property, relational, logical patterns
+
+Cleaner control flow with switch expressions
+
+Async Programming
+
+async, await, Task, ValueTask
+
+Best practices and common pitfalls
+
+Memory & Performance
+
+Garbage collection (Gen 0/1/2), LOH
+
+Use of Span<T>, pooling, avoiding allocations
+
+Tools: BenchmarkDotNet, PerfView, dotMemory
